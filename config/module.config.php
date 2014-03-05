@@ -2,8 +2,11 @@
 
 return array(
     "kokacrud" => array(
+        // Set to true if you want to use the shipped CRUD controller & dynamically created routes for your entities
         "enable_crud_routes" => true,
+        // the baseurl used for the dynamic CRUD controller and routing
         "crud_baseurl" => "kokacrud",
+        // available query params for index views (dont change keys)
         "crud_query_params" => array(
             "search_param_key" => "search",
             "scope_param_key" => "scope",
@@ -14,22 +17,13 @@ return array(
         "template_fallback_captureto" => array(
             "content"
         ),
-        // Fallback templates
+        // Fallback templates (if youre using your own abstracted controller without templates, the view will fallback to the shipped ones)
         "vendor_templates" => array(
             "index" => 'koka-crud/abstract-action/index',
             "edit" => 'koka-crud/abstract-action/edit',
             "delete" => 'koka-crud/abstract-action/delete',
         ),
-        "entities" => array(
-            "exampleentity" => array(
-                "entityClass" => "KokaCrud\Entity\ExampleEntity"
-            )
-        )
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'KokaCrud\Controller\Crud' => 'KokaCrud\Controller\CrudController',
-        ),
+    // Register entities you want to use with the shipped CRUD controller here (not necessary if youre using your own abstracted controller)
     ),
     // Add template fallback dir
     'view_manager' => array(
@@ -37,21 +31,6 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-    // 'doctrine.orm.metadata.annotation.class' => "KokaCrud\Patch\DoctrineOrmAnnotationDriver",
-    'doctrine' => array(
-        'driver' => array(
-            'kokacrud_entities' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => array(
-                    __DIR__ . '/../src/KokaCrud/Entity'
-                )
-            ),
-            'orm_default' => array(
-                'drivers' => array(
-                    'KokaCrud\Entity' => 'kokacrud_entities'
-                )
-            )
-        )
-    ),
+        // Patch due to a autoload bug which was in conflict with zenddevelopertools profiler (dont use it)
+        // 'doctrine.orm.metadata.annotation.class' => "KokaCrud\Patch\DoctrineOrmAnnotationDriver",
 );
