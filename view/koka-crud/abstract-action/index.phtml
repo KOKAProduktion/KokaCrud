@@ -1,0 +1,124 @@
+<div class="row-fluid"><div class="span6">
+        <h3>
+            <a href="<?php echo $this->url("kokacrud"); ?>">Entities</a> &raquo; <?php echo $this->entityClass; ?>
+        </h3>
+    </div>
+    <div class="span6">
+        <?php
+        echo $this->form()->openTag($this->searchForm);
+        echo $this->formCollection($this->searchForm);
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <?php
+        foreach ($this->entityProperties as $entityProperty) {
+            ?>
+            <th>
+                <?php
+                if (
+                        isset($this->queryParams[$this->config["crud_query_params"]["sort_param_key"]]) &&
+                        $this->queryParams[$this->config["crud_query_params"]["sort_param_key"]] == $entityProperty
+                ) {
+                    if (
+                            isset($this->queryParams[$this->config["crud_query_params"]["order_param_key"]]) &&
+                            $this->queryParams[$this->config["crud_query_params"]["order_param_key"]] == "desc"
+                    ) {
+                        ?> 
+                        <a class="active" href="<?php
+                        echo $this->url($this->matchedRouteName, array_merge($this->queryParams, array(
+                            $this->config["crud_query_params"]["sort_param_key"] => $entityProperty,
+                            $this->config["crud_query_params"]["order_param_key"] => "asc"
+                                        )
+                                )
+                        );
+                        ?>"><?php echo $entityProperty; ?> &darr;
+                        </a>
+                        <?php
+                    } else {
+                        ?> 
+                        <a class="active" href="<?php
+                        echo $this->url($this->matchedRouteName, array_merge($this->queryParams, array(
+                            $this->config["crud_query_params"]["sort_param_key"] => $entityProperty,
+                            $this->config["crud_query_params"]["order_param_key"] => "desc"
+                                        )
+                                )
+                        );
+                        ?>"><?php echo $entityProperty; ?> &uarr;
+                        </a>
+                        <?php
+                    }
+                } else {
+                    ?> 
+                    <a href="<?php
+                    echo $this->url($this->matchedRouteName, array_merge($this->queryParams, array(
+                        $this->config["crud_query_params"]["sort_param_key"] => $entityProperty
+                                    )
+                            )
+                    );
+                    ?>"><?php echo $entityProperty; ?>
+                    </a>
+                    <?php
+                }
+                ?>
+            </th>
+            <?php
+        }
+        ?>
+        <th>
+            <a class="btn btn-link" href="<?php echo $this->url($this->matchedRouteName, array("action" => "edit")); ?>">Add</a>
+        </th>
+        <th>
+            &nbsp;
+        </th>
+    </tr>
+    <?php
+    foreach ($this->paginator->getIterator() as $entity) {
+        ?>
+        <tr>
+            <?php
+            foreach ($this->entityProperties as $entityProperty) {
+                ?>
+                <td>
+                    <?php
+                    echo var_export($entity->{"get" . $entityProperty}(), true);
+                    ?>
+                </td>
+                <?php
+            }
+            ?>
+            <td>
+                <a class="btn btn-link" href="<?php echo $this->url($this->matchedRouteName, array("action" => "edit", "id" => $entity->getId())); ?>">Edit</a>
+            </td>
+            <td>
+                <?php
+                $this->deleteForm->get("id")->setValue($entity->getId());
+                echo $this->form()->openTag($this->deleteForm);
+                foreach ($this->deleteForm->getElements() as $element) { //var_dump($element);
+                    ?>
+                    <?php
+                    echo $this->formElement($element);
+                    echo $this->formElementErrors($element);
+                    ?>
+                    <?php
+                }
+                echo $this->form()->closeTag();
+                ?>    
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+<?php
+echo $this->paginationControl(
+        // the paginator object
+        $this->paginator,
+        // the scrolling style; see http://zf2.readthedocs.org/en/release-2.1.4/modules/zend.paginator.usage.html#rendering-pages-with-view-scripts
+        'sliding',
+        // the partial to use to render the control
+        array('koka-crud/pagination.phtml', 'KokaCrud'), array("route" => $this->matchedRouteName, "queryParams" => $this->queryParams)
+);
+?>

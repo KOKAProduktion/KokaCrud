@@ -1,0 +1,30 @@
+<h3>
+    <a href="<?php echo $this->url("kokacrud"); ?>">Entities</a> &raquo; <a href="<?php echo $this->url($this->matchedRouteName, array("action" => "index")); ?>"><?php echo $this->entityClass; ?></a> &raquo; Edit entity
+</h3>
+<?php
+echo $this->form()->openTag($this->form);
+foreach ($this->form->getElements() as $element) { //var_dump($element);
+    ?>
+    <div class="row-fluid">
+        <?php
+        ?>
+        <div class="span3">
+            <?php
+            echo $element->getOption('label');
+            ?>
+        </div>
+        <?php
+        ?>
+        <div class="span9">
+            <?php
+            echo $this->formElement($element);
+            echo $this->formElementErrors($element);
+            ?>
+        </div>
+        <?php
+        ?>
+    </div>
+    <?php
+}
+echo $this->form()->closeTag();
+?>

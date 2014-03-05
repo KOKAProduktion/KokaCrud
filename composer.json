@@ -1,0 +1,33 @@
+{
+    "name": "koka/kokacrud",
+    "description": "Extendable CRUD module for ZF2 using Doctrine2",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "crud",
+        "zf2",
+        "doctrine2",
+        "annotation"
+    ],
+    "authors": [
+        {
+            "name": "Kosma Kaczmarski",
+            "email": "info@koka-produktion.de",
+            "homepage": "http://www.koka-produktion.de/"
+        }
+    ],
+    "homepage": "http://www.koka-produktion.de/",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.*",
+        "doctrine/doctrine-orm-module": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "KokaCrud": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}

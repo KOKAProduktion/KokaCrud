@@ -1,0 +1,54 @@
+<h3>
+    <a href="<?php echo $this->url("kokacrud"); ?>">Entities</a> &raquo; <a href="<?php echo $this->url($this->matchedRouteName, array("action" => "index")); ?>"><?php echo $this->entityClass; ?></a> &raquo; Delete entity
+</h3>
+<table class="table">
+    <tr>
+        <?php
+        foreach ($this->entityProperties as $entityProperty) {
+            ?>
+            <th>
+                <?php echo $entityProperty; ?>
+
+            </th>
+            <?php
+        }
+        ?>
+        <th>
+            &nbsp;
+        </th>
+    </tr>
+    <?php
+    ?>
+    <tr>
+        <?php
+        foreach ($this->entityProperties as $entityProperty) {
+            ?>
+            <td>
+                <?php
+                echo var_export($this->entity->{"get" . $entityProperty}(), true);
+                ?>
+            </td>
+            <?php
+        }
+        ?>
+        <td>
+            <a href="<?php echo $this->url($this->matchedRouteName, array("action" => "edit", "id" => $this->entity->getId())); ?>">Edit</a>
+        </td>
+    </tr>
+    <?php
+    ?>
+</table>
+<div class="row-fluid">
+    <?php
+    echo $this->form()->openTag($this->form);
+    foreach ($this->form->getElements() as $element) { //var_dump($element);
+        ?>
+        <?php
+        echo $this->formElement($element);
+        echo $this->formElementErrors($element);
+        ?>
+        <?php
+    }
+    echo $this->form()->closeTag();
+    ?>    
+</div>

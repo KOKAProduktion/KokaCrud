@@ -1,0 +1,58 @@
+<h3>
+    Entities
+</h3>
+<table class="table">
+    <tr>
+
+        <th>
+            slug
+        </th>
+        <th>
+            config
+        </th>
+        <th>
+            &nbsp;
+        </th>
+
+    </tr>
+    <?php
+    foreach ($this->paginator->getIterator() as $slug => $entityConfig) {
+        ?>
+        <tr>
+            <td>
+                <?php
+                echo $slug;
+                ?>
+            </td>
+            <td>
+
+                <?php
+                foreach ($entityConfig as $key => $value) {
+                    ?>
+
+                    <?php
+                    echo $key." => ".var_export($value,true).'<br/>';
+                    ?>
+                    <?php
+                }
+                ?>
+            </td>
+
+            <td>
+                <a href="<?php echo $this->url($slug, array("action" => "index" )); ?>">List</a>
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+<?php 
+echo $this->paginationControl(
+        // the paginator object
+        $this->paginator,
+        // the scrolling style; see http://zf2.readthedocs.org/en/release-2.1.4/modules/zend.paginator.usage.html#rendering-pages-with-view-scripts
+        'sliding',
+        // the partial to use to render the control
+        array('koka-crud/pagination.phtml', 'KokaCrud')
+);
+?>
