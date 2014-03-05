@@ -18,7 +18,7 @@ Current state: Initial module and routines implemented. Thank you for trying it 
   "repositories": [
       {
           "type": "vcs",
-          "url": "https://github.com/KosmaKaczmarski/KokaCrud.git"
+          "url": "https://github.com/KOKAProduktion/KokaCrud.git"
       }
   ],
   ...
