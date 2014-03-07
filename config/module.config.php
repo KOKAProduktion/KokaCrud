@@ -31,6 +31,6 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-        // Patch due to a autoload bug which was in conflict with zenddevelopertools profiler (dont use it)
+        // Patch due to a autoload bug which was in conflict with zenddevelopertools profiler (dont use this patch)
         // 'doctrine.orm.metadata.annotation.class' => "KokaCrud\Patch\DoctrineOrmAnnotationDriver",
 );

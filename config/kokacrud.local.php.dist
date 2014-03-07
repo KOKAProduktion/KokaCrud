@@ -36,7 +36,7 @@ return array(
             'KokaCrud\Controller\Crud' => 'KokaCrud\Controller\CrudController',
         ),
     ),
-    // Patch due to a autoload bug which was in conflict with zenddevelopertools profiler (dont use it)
+    // Patch due to a autoload bug which was in conflict with zenddevelopertools profiler (dont use this patch)
     // 'doctrine.orm.metadata.annotation.class' => "KokaCrud\Patch\DoctrineOrmAnnotationDriver",
     
     // Register your entities with doctrine
