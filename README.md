@@ -1,5 +1,13 @@
-KokaCrud
-========
+***Please Note: for educational purposes only, no longer supported.***
+```
+CVE-2021-3007
+critical severity
+Vulnerable versions: <= 3.0.0
+Patched version: No fix
+
+Zend Framework 3.0.0 has a deserialization vulnerability that can lead to remote code execution if the content is controllable, related to the __destruct method of the Zend\Http\Response\Stream class in Stream.php. NOTE: the code may be related to Laminas Project laminas-http. Zend Framework is no longer supported by the maintainer. However, not all Zend Framework 3.0.0 vulnerabilities exist in a Laminas Project release.
+```
+# KokaCrud
 
 Extendable CRUD module for ZF2 using Doctrine2 and Zend\Form\Annotation
 
@@ -7,7 +15,7 @@ This module is intended to serve as a common base for applications, managing the
 
 Current state: Initial module and routines implemented. Thank you for trying it out!
 
-###Installation
+### Installation
 1. Complement your composer.json with the following statements
 
   ```json
